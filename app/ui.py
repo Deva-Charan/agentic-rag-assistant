@@ -66,9 +66,11 @@ def _auto_ingest(uploaded_files) -> None:
                     tmp.write(uploaded_file.read())
                     tmp_path = tmp.name
 
-                initialize_database(tmp_path, force_reingest=False)
-                os.unlink(tmp_path)
-                st.session_state.ingested_files.append(file_name)
+                try:
+                    initialize_database(tmp_path, force_reingest=True)
+                    st.session_state.ingested_files.append(file_name)
+                finally:
+                    os.unlink(tmp_path)
 
             except Exception as e:
                 st.error(f"❌ Failed to ingest **{file_name}**: {e}")
