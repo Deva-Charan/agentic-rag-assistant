@@ -103,7 +103,7 @@ def initialize_database(source: str, force_reingest: bool = False) -> None:
     else:
         # Check if the index already has vectors — skip ingestion to save cost
         stats = pc.Index(INDEX_NAME).describe_index_stats()
-        vector_count = stats.get("total_vector_count", 0)
+        vector_count = getattr(stats, "total_vector_count", 0)
         if vector_count > 0 and not force_reingest:
             print(f"⚡ Index '{INDEX_NAME}' already has {vector_count} vectors. Skipping ingestion.")
             print("   Use force_reingest=True to rebuild from scratch.")
