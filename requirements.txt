@@ -5,7 +5,7 @@ langchain-pinecone>=0.2
 langchain-groq>=0.2
 langchain-text-splitters>=0.3
 langgraph>=0.2
-pinecone-client>=3.0
+pinecone
 pypdf>=4.0
 sentence-transformers>=3.0
 streamlit>=1.35
